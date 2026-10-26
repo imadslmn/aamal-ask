@@ -8,29 +8,7 @@ from typing import List, Dict, Any, Optional, TypedDict, Annotated, Sequence
 from dotenv import load_dotenv
 from pathlib import Path
 
-# Debug: Print current working directory and .env file status
-print(f"Current working directory: {os.getcwd()}")
-
-# Try to load .env from multiple locations
-env_paths = [
-    Path(os.getcwd()) / '.env',  # Current directory
-    Path(os.getcwd()).parent / '.env',  # Parent directory
-    Path(__file__).parent / '.env',  # Same directory as this file
-    Path(__file__).parent.parent / '.env',  # Parent of this file's directory
-]
-
-for env_path in env_paths:
-    print(f"Checking for .env at: {env_path}")
-    if env_path.exists():
-        print(f"Found .env at: {env_path}")
-        load_dotenv(env_path)
-        break
-else:
-    print("No .env file found in any of the checked locations")
-
-# Debug: Print environment variables
-api_key = os.getenv('OPENAI_API_KEY')
-print(f"OPENAI_API_KEY from env: {'Found' if api_key else 'Not found'}")
+load_dotenv()
 
 # --- FastAPI Imports ---
 import uvicorn
